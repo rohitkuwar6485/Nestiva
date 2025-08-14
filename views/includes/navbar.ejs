@@ -1,0 +1,85 @@
+<style>
+  /* Search Button */
+  .search-btn {
+    background-color: #FF385C; /* Airbnb red */
+    color: #ffffff;
+    border-radius: 25px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .search-btn:hover {
+    background-color: #ff2d47; /* Slightly darker on hover */
+  }
+
+  .search-btn i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem; /* Larger icon */
+  }
+
+  /* Input Field */
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 2.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
+  }
+
+  .search-inp:focus {
+    outline: none;
+    border-color: #FF385C; /* Red border on focus */
+  }
+
+  .search-inp::placeholder {
+    color: #777; /* Light placeholder color */
+  }
+
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarNavAltMarkup" 
+        >
+            <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Nestiva</a>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+          <form class="d-flex" role="search">
+              <input class="form-control me-2 search-inp" type="search" placeholder="Search destination" aria-label="Search destination">
+              <button class="btn search-btn" type="submit">
+                  <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+          </form>
+      </div>
+
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% if(!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+          <a class="nav-link" href="/login"><b>Log In</b></a>
+        <% } %>
+        <% if(currUser) { %>
+          <a class="nav-link" href="/logout"><b>Log Out</b></a>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</nav>
