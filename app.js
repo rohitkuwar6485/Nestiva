@@ -41,6 +41,7 @@ const User = require("./models/user.js");
 
 // //mongoose required & MODELS FOLDERS
 const mongoose = require("mongoose");
+const Listing = require("./models/listing.js");
 
 //-------------required Router folder for routes-------------//
 const listingRouter = require("./routes/listing.js");
@@ -102,17 +103,10 @@ app.use((req,res,next) => {
     next();
 });
 
-// //----------
-// app.get("/demouser", async(req,res)=>{
-//     let fakeUser = new User({
-//         email:"abc123@gmail.com",
-//         username:"delt-student",
-//     });
-
-//     let register = await User.register(fakeUser,"helloword");
-//     res.send(register);
-// });
-
+app.get('/', async (req, res) => {
+  const allListings = await Listing.find({});
+  res.render('listings/index.ejs', { allListings });
+});
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
