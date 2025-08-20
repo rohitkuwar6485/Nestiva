@@ -84,28 +84,31 @@ module.exports.listingsByCategory = async (req, res) => {
     res.render("listings/index.ejs", { allListings: filteredListings });
 };
 
-// Search listings by keyword
 module.exports.searchListings = async (req, res) => {
     const { q } = req.query;
 
-    if (!q || q.trim() === "") {
+    // Trim and normalize input (removes extra spaces and smart quotes)
+    const query = q ? q.trim().replace(/[“”‘’]/g, '"') : "";
+
+    if (!query) {
         req.flash("error", "Please enter something to search!");
         return res.redirect("/listings");
     }
 
     const listings = await Listing.find({
         $or: [
-            { title: { $regex: q, $options: "i" } },
-            { location: { $regex: q, $options: "i" } },
-            { country: { $regex: q, $options: "i" } },
-            { category: { $regex: q, $options: "i" } }
+            { title: { $regex: query, $options: "i" } },
+            { location: { $regex: query, $options: "i" } },
+            { country: { $regex: query, $options: "i" } },
+            { category: { $regex: query, $options: "i" } }
         ]
     });
 
     if (listings.length === 0) {
-        req.flash("error", `No results found for "${q}"`);
+        req.flash("error", `No results found for "${query}"`);
         return res.redirect("/listings");
     }
 
     res.render("listings/index.ejs", { allListings: listings });
 };
+
