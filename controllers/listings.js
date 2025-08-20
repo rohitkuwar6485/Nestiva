@@ -83,3 +83,29 @@ module.exports.listingsByCategory = async (req, res) => {
     }
     res.render("listings/index.ejs", { allListings: filteredListings });
 };
+
+// Search listings by keyword
+module.exports.searchListings = async (req, res) => {
+    const { q } = req.query;
+
+    if (!q || q.trim() === "") {
+        req.flash("error", "Please enter something to search!");
+        return res.redirect("/listings");
+    }
+
+    const listings = await Listing.find({
+        $or: [
+            { title: { $regex: q, $options: "i" } },
+            { location: { $regex: q, $options: "i" } },
+            { country: { $regex: q, $options: "i" } },
+            { category: { $regex: q, $options: "i" } }
+        ]
+    });
+
+    if (listings.length === 0) {
+        req.flash("error", `No results found for "${q}"`);
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/index.ejs", { allListings: listings });
+};

@@ -16,6 +16,9 @@ const upload = multer( { storage } );
 // Route to get listings filtered by category
 router.get("/category/:categoryName", wrapAsync(listingController.listingsByCategory));
 
+//Search Route to get Listings
+router.get("/search", wrapAsync(listingController.searchListings));
+
 //--INDEX ROUTE--&&--Create Route--//
 router
     .route("/")
