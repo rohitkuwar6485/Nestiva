@@ -14,7 +14,8 @@ It showcases core **MEN stack (MongoDB, Express.js, Node.js)** development skill
 - 🔐 **User Authentication** — Sign up and log in securely  
 - 🏠 **Property Listings** — Add, edit, or delete properties  
 - 🖼️ **Image Uploads** — Cloudinary integration for property images  
-- 💬 **Reviews** — Post and delete reviews on listings  
+- 💬 **Reviews** — Post and delete reviews on listings
+- 🔍 **Search Functionality** — Users can search listings by title, location, country, or category
 
 ---
 
